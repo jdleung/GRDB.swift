@@ -55,7 +55,7 @@ let package = Package(
     ],
     products: [
         // GRDB+SQLCipher: Delete the GRDBSQLite library
-        .library(name: "GRDBSQLite", targets: ["GRDBSQLite"]),
+        // .library(name: "GRDBSQLite", targets: ["GRDBSQLite"]),
         .library(name: "GRDB", targets: ["GRDB"]),
         .library(name: "GRDB-dynamic", type: .dynamic, targets: ["GRDB"]),
     ],
@@ -66,18 +66,18 @@ let package = Package(
             name: "GRDBSQLite",
             providers: [.apt(["libsqlite3-dev"])]),
         // GRDB+SQLCipher: Uncomment the GRDBSQLCipher target
-        //.target(
-        //    name: "GRDBSQLCipher",
-        //    dependencies: [.product(name: "SQLCipher", package: "SQLCipher.swift")]
-        //),
+        .target(
+            name: "GRDBSQLCipher",
+            dependencies: [.product(name: "SQLCipher", package: "SQLCipher.swift")]
+        ),
         .target(
             name: "GRDB",
             dependencies: [
                 // GRDB+SQLCipher: Delete the GRDBSQLite dependency
-                .target(name: "GRDBSQLite"),
+                // .target(name: "GRDBSQLite"),
                 // GRDB+SQLCipher: Uncomment the SQLCipher and GRDBSQLCipher dependencies
-                //.product(name: "SQLCipher", package: "SQLCipher.swift"),
-                //.target(name: "GRDBSQLCipher"),
+                .product(name: "SQLCipher", package: "SQLCipher.swift"),
+                .target(name: "GRDBSQLCipher"),
             ],
             path: "GRDB",
             resources: [.copy("PrivacyInfo.xcprivacy")],
